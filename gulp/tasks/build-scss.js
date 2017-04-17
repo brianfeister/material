@@ -34,8 +34,8 @@ exports.task = function() {
     scssPipe = gulp.src(getPaths())
       .pipe(util.filterNonCodeFiles())
       .pipe(filter(['**', '!**/*.css']))
-      .pipe(filter(['**', '!**/*-theme.scss']))
-      .pipe(filter(['**', '!**/*-attributes.scss']))
+      // .pipe(filter(['**', '!**/*-theme.scss']))
+      // .pipe(filter(['**', '!**/*-attributes.scss']))
       .pipe(concat('angular-material.scss'))
       .pipe(gulp.dest(dest))            // raw uncompiled SCSS
       .pipe(sass())
@@ -85,22 +85,22 @@ exports.task = function() {
   //  * use of the Layout directives and classnames, and
   //  * Layout module `material.core.layout
 
-  streams.push(
-      gulp.src(config.scssLayoutAttributeFiles)
-          .pipe(concat('angular-material.layout-attributes.scss'))
-          .pipe(sassUtils.hoistScssVariables())
-          .pipe(gulp.dest(layoutDest))     // raw uncompiled SCSS
-          .pipe(sass())
-          .pipe(util.dedupeCss())
-          .pipe(util.autoprefix())
-          .pipe(rename({ extname : '.css'}))
-          .pipe(insert.prepend(config.banner))
-          .pipe(gulp.dest(layoutDest))
-          .pipe(gulpif(!IS_DEV, minifyCss()))
-          .pipe(gulpif(!IS_DEV, util.dedupeCss()))
-          .pipe(rename({extname: '.min.css'}))
-          .pipe(gulp.dest(layoutDest))
-  );
+  // streams.push(
+  //     gulp.src(config.scssLayoutAttributeFiles)
+  //         .pipe(concat('angular-material.layout-attributes.scss'))
+  //         .pipe(sassUtils.hoistScssVariables())
+  //         .pipe(gulp.dest(layoutDest))     // raw uncompiled SCSS
+  //         .pipe(sass())
+  //         .pipe(util.dedupeCss())
+  //         .pipe(util.autoprefix())
+  //         .pipe(rename({ extname : '.css'}))
+  //         .pipe(insert.prepend(config.banner))
+  //         .pipe(gulp.dest(layoutDest))
+  //         .pipe(gulpif(!IS_DEV, minifyCss()))
+  //         .pipe(gulpif(!IS_DEV, util.dedupeCss()))
+  //         .pipe(rename({extname: '.min.css'}))
+  //         .pipe(gulp.dest(layoutDest))
+  // );
 
   return series(streams);
 
